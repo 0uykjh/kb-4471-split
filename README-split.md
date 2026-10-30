@@ -5,12 +5,11 @@ known. Reading the bodies shows it holds three problems, not one. Each has a tic
 
 | problem | reports | ticket |
 |---|---|---|
-| parser reads dates month first | 379 | [#1](https://github.com/0uykjh/kb-4471-split/issues/1) |
+| parser reads dates month first | 374 | [#1](https://github.com/0uykjh/kb-4471-split/issues/1) |
 | booking-v3 prints a month-first date hint | 33 | [#2](https://github.com/0uykjh/kb-4471-split/issues/2) |
 | booking moves one day | 5 | [#3](https://github.com/0uykjh/kb-4471-split/issues/3) |
 
-379 + 33 = 412. The five one-day reports are counted under the parser, where the desk files
-them, and still get a ticket of their own, because a footnote is not something anyone fixes.
+374 + 33 + 5 = 412. Every report is counted once.
 
 ## The page
 

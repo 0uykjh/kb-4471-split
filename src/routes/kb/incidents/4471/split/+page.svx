@@ -54,9 +54,8 @@ booking that slid by a single day:
 
 A date built in one timezone and read in another does exactly this, and a summer-only version of
 it is what a daylight-saving offset looks like. The desk saw these: `desk-notes.json` lists them
-under `oneDayMove`, and the #4471 page footnotes them. They stay in the parser's count, because
-that is where the desk files them and a report is counted once, where it is filed. What changes
-is that the problem now has a ticket instead of a footnote.
+under `oneDayMove`, and the #4471 page footnotes them. They were still counted under the parser,
+because the footnote never changed where they were filed.
 
 ## Why the third one hid
 
@@ -71,10 +70,8 @@ evidence. It is taken from the reporter's browser, which is not where the bug is
 
 ## What to do with this page
 
-- A problem gets a ticket, even when its reports are counted under another one. A footnote
-  names nothing, and nobody fixes a footnote.
-- Count a report once, where it is filed. The table above says where that is, so the two
-  numbers never have to be reconciled by hand.
+- Count a report under the problem its body describes, not the ticket its subject landed in.
+- A footnote is not a count. If reports do not belong to a ticket, move them.
 - Decision 0001 buys triage speed and pays for it in merged-together bugs. That trade is still
   the desk's to make, but it should be made knowing a merged ticket can hold a bug nobody has
   named.

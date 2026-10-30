@@ -40,10 +40,7 @@
   <tbody>
     {#each groups as g (g.problem)}
       <tr>
-        <td>
-          <code>{g.problem}</code> — {label[g.problem]}
-          {#if g.countedUnder}<em class="sub">counted under <code>{g.countedUnder}</code>, where the desk files them</em>{/if}
-        </td>
+        <td><code>{g.problem}</code> — {label[g.problem]}</td>
         <td><strong>{g.reports.length}</strong></td>
         <td class="tags">{tags(g)}</td>
         <td>{g.tenants}</td>
@@ -68,5 +65,4 @@
   .sum { font-size: 1.1rem; }
   .tags { color: var(--muted); font-size: 0.85em; }
   .note { color: var(--muted); font-size: 0.85em; }
-  .sub { display: block; color: var(--muted); font-size: 0.85em; font-style: normal; }
 </style>
