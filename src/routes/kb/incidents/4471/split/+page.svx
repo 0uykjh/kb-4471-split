@@ -1,0 +1,79 @@
+---
+layout: runbook
+title: '#4471 · three problems, not one'
+owner: Jakub Wilczek
+status: open
+reviewed: 2026-10-30
+signature: Jakub Wilczek
+---
+
+<script>
+  import ProblemTable from '#lib/kb/ProblemTable.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+</script>
+
+#4471 was built by [decision 0001](/kb/decisions/0001-dedupe-by-subject): a report joins an open
+ticket when its subject matches, and nobody reads the body. People whose dates come out wrong
+write the same subject whatever went wrong, so the ticket grew into a bag of everything that
+makes a date look wrong.
+
+Reading the bodies splits it. Each problem below has its own mechanism and its own fix, and each
+now has its own ticket.
+
+<ProblemTable ticket={4471} repo="0uykjh/kb-4471-split" issues={{ parser: 1, hint: 2, clock: 3 }} />
+
+## parser — the shared parser reads dates month first
+
+The one the desk already knew. Our tenants write the day first, the parser reads the month
+first, so a date comes back with its halves exchanged. The bodies say so outright: a booking
+made for one date arrives as the date you get by swapping its two numbers.
+
+## hint — booking-v3 prints the wrong date hint
+
+`causes.ts` has always separated this from the parser, and the page about #4471 shows it in its
+own row, marked as belonging to no ticket of its own. Under the date field booking-v3 prints
+`MM/DD/YYYY`. Day-first tenants read the hint, type the month first as told, and the form reads
+what they typed their own way. The dates are wrong for the opposite reason: here the person
+followed the product, and the product changed its mind.
+
+<Callout>
+Fixing the parser does not fix this one. It would leave these tenants typing month first into a
+form that has started reading day first, which is the same wrong date from the other side.
+</Callout>
+
+## clock — the booking keeps its date and moves one day
+
+The one nothing in the kb could see. These bodies do not describe a swap. They describe a
+booking that slid by a single day:
+
+- an invite for Tuesday that the calendar shows on the Monday;
+- bookings that are one day off in June, and only in June;
+- the same meeting reaching Lisbon on Tuesday and Toronto on Monday;
+- an invite that arrived before the booking that caused it.
+
+A date built in one timezone and read in another does exactly this, and a summer-only version of
+it is what a daylight-saving offset looks like. The desk saw these: `desk-notes.json` lists them
+under `oneDayMove`, and the #4471 page footnotes them. They were still counted under the parser,
+because the footnote never changed where they were filed.
+
+## Why the third one hid
+
+`causes.ts` decides from the channel and the tenant. Those are what intake records, and they are
+enough to tell the parser from the hint, because that difference is a property of the form. They
+are not enough for this one. A one-day shift and a month flip reach the desk looking identical:
+the same twelve subject lines, the same tenants, the same channels. The difference is only in the
+words, and no rule in the kb reads the words.
+
+Intake's own guess is in the table above, and it is wrong often enough to be worth nothing as
+evidence. It is taken from the reporter's browser, which is not where the bug is.
+
+## What to do with this page
+
+- Count a report under the problem its body describes, not the ticket its subject landed in.
+- A footnote is not a count. If reports do not belong to a ticket, move them.
+- Decision 0001 buys triage speed and pays for it in merged-together bugs. That trade is still
+  the desk's to make, but it should be made knowing a merged ticket can hold a bug nobody has
+  named.
+
+<RenderStamp {signature} />
