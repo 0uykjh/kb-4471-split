@@ -19,14 +19,17 @@ merged 412 reports here, on subject line alone.
 [The split](/kb/incidents/4471/split) counts each one and says how they differ.
 
 - **parser**: the parser reads dates month first, and our tenants write the day first. This stays
-  in #4471. The fix is queued.
+  in #4471. Fixed on 5 October by `fix(dates): parse dd/mm for eu locales`.
 - **hint**: booking-v3 prints a month-first date hint. Its reports moved to
-  [#2](https://github.com/0uykjh/kb-4471-split/issues/2).
+  [#2](https://github.com/0uykjh/kb-4471-split/issues/2). Won't fix: the booking-v3 form is
+  retired.
 - **clock**: the booking keeps its date and moves one day. Its reports moved to
-  [#3](https://github.com/0uykjh/kb-4471-split/issues/3).
+  [#3](https://github.com/0uykjh/kb-4471-split/issues/3). Open: the parser fix does not touch it,
+  and nobody owns it yet.
 
 <Callout>
-Split. #4471 is the parser bug only; the other two problems have their own tickets.
+Engineering closed #4471 on 5 October. That closed the parser and the hint. The one-day shift is
+still open in #3.
 </Callout>
 
 ## What is left in #4471
