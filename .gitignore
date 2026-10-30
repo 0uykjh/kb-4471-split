@@ -1,2 +1,5 @@
 node_modules/
 render/out/
+render/split.html
+render/test.html
+render/page.html
