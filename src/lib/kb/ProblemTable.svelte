@@ -5,12 +5,15 @@
   import { groupByProblem, misTagged, duplicateRows } from '#lib/kb/split-4471';
   import { tenantOf } from '#lib/kb/locales';
 
-  // `issues` maps a problem to the ticket now holding it. Issue numbers cannot be computed, so
-  // the page passes them; every count on this page is computed here.
+  // `issues` maps a problem moved out of the ticket to the ticket now holding it; a problem with
+  // no entry stays in `ticket`. Issue numbers cannot be computed, so the page passes them; every
+  // count on this page is computed here.
   let { ticket, repo, issues }: { ticket: number; repo: string; issues: Record<string, number> } = $props();
 
   const all = $derived(uniqueById(raw as Report[]));
-  const merged = $derived(all.filter((r) => r.mergedInto === ticket));
+  // Everything that was merged into the ticket: what is still there, and what moved out of it.
+  const homes = $derived(new Set([ticket, ...Object.values(issues)]));
+  const merged = $derived(all.filter((r) => r.mergedInto !== null && homes.has(r.mergedInto)));
   const groups = $derived(groupByProblem(merged, tenantOf, notes.oneDayMove));
   const dupes = $derived(duplicateRows(raw as Report[], all));
   const wrongTag = $derived(misTagged(groups));
@@ -28,7 +31,7 @@
 </script>
 
 <p class="sum">
-  <strong>{merged.length}</strong> reports in #{ticket} ·
+  <strong>{merged.length}</strong> reports merged into #{ticket} ·
   <strong>{groups.length}</strong>
   {groups.length === 1 ? 'problem' : 'problems'}
 </p>
@@ -48,7 +51,7 @@
         <td>
           {#if issues[g.problem]}
             <a href="https://github.com/{repo}/issues/{issues[g.problem]}">#{issues[g.problem]}</a>
-          {:else}—{/if}
+          {:else}#{ticket}{/if}
         </td>
       </tr>
     {/each}

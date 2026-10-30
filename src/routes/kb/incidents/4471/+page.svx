@@ -2,8 +2,8 @@
 layout: runbook
 title: '#4471 · dates parse mm/dd in eu locales'
 owner: support desk
-status: known
-reviewed: 2026-09-30
+status: split
+reviewed: 2026-10-30
 ---
 
 <script>
@@ -12,17 +12,24 @@ reviewed: 2026-09-30
   import Callout from '#lib/kb/Callout.svelte';
 </script>
 
-Since April, people have told us their bookings land on the wrong day: a month flipped. By
-4 October the desk had **412 reports**.
+Since April, people have told us their bookings land on the wrong day. By 4 October the desk had
+merged 412 reports here, on subject line alone.
 
-**Merged as one issue.** The parser reads dates month first, and our tenants write the day
-first. The fix is queued.
+**Split into three problems.** Reading the bodies showed that #4471 held three bugs, not one.
+[The split](/kb/incidents/4471/split) counts each one and says how they differ.
+
+- **parser**: the parser reads dates month first, and our tenants write the day first. This stays
+  in #4471. The fix is queued.
+- **hint**: booking-v3 prints a month-first date hint. Its reports moved to
+  [#2](https://github.com/0uykjh/kb-4471-split/issues/2).
+- **clock**: the booking keeps its date and moves one day. Its reports moved to
+  [#3](https://github.com/0uykjh/kb-4471-split/issues/3).
 
 <Callout>
-Known. One issue, one fix queued.
+Split. #4471 is the parser bug only; the other two problems have their own tickets.
 </Callout>
 
-## What was merged
+## What is left in #4471
 
 <CauseTable ticket={4471} />
 

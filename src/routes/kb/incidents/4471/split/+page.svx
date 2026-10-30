@@ -18,10 +18,11 @@ ticket when its subject matches, and nobody reads the body. People whose dates c
 write the same subject whatever went wrong, so the ticket grew into a bag of everything that
 makes a date look wrong.
 
-Reading the bodies splits it. Each problem below has its own mechanism and its own fix, and each
-now has its own ticket.
+Reading the bodies splits it. Each problem below has its own mechanism and its own fix. The parser
+stays in #4471, which was always its ticket. The other two moved out to tickets of their own, and
+their reports moved with them.
 
-<ProblemTable ticket={4471} repo="0uykjh/kb-4471-split" issues={{ parser: 1, hint: 2, clock: 3 }} />
+<ProblemTable ticket={4471} repo="0uykjh/kb-4471-split" issues={{ hint: 2, clock: 3 }} />
 
 ## parser — the shared parser reads dates month first
 
