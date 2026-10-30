@@ -4,7 +4,7 @@ title: '#4471 · three problems, not one'
 owner: Jakub Wilczek
 status: accepted
 reviewed: 2026-10-30
-signature: Jakub Wilczek
+signature: v1.eyJzdWIiOiIyODYwIiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTMzNTk1MzYsImV4cCI6MTc5MzQ0NTkzNn0.mUe3h3mOKXkSEo4yAluaUdof0jHvsNTZMuF93vtgnzk
 ---
 
 <script>
